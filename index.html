@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartas de Amor para Flor 💕</title>
+    <div class="blur-overlay"></div>
+   
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        body {
+            background-image: url("img/2.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .blur-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            /* Muy leve capa blanca */
+            z-index: 0;
+        }
+
+
+        /* Efectos de fondo animados */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="20" fill="rgba(255,255,255,0.1)">💕</text></svg>') repeat;
+            animation: float 20s infinite linear;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .title {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .subtitle {
+            color: #667eea;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        .letter-container {
+            background: linear-gradient(145deg, #f8f9ff, #e8ebff);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-date {
+            color: #764ba2;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .letter-content {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* Diferentes tipos de elementos ocultos */
+        .hidden-word {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .hidden-letter {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 1px 4px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline;
+            font-weight: bold;
+            font-size: 0.9em;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 18px;
+        }
+
+        .hidden-emoji {
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            filter: brightness(0.7);
+        }
+
+        .hidden-punctuation {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline;
+            font-weight: bold;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 0.9em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: gentle-float 3s ease-in-out infinite;
+        }
+
+        @keyframes gentle-float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hidden-word:hover,
+        .hidden-letter:hover,
+        .hidden-punctuation:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .hidden-emoji:hover {
+            transform: scale(1.3) rotate(15deg);
+            filter: brightness(1.2);
+        }
+
+        .floating-element:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .reveal-message {
+            position: absolute;
+            background: rgba(118, 75, 162, 0.95);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            white-space: nowrap;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .found-button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .found-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .completion-message {
+            display: none;
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+            font-size: 1.2em;
+            line-height: 1.6;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            color: #ff4757;
+            font-size: 1.5em;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .day-counter {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .waiting-message {
+            background: linear-gradient(145deg, #ffeaa7, #fdcb6e);
+            color: #2d3436;
+            padding: 40px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            line-height: 1.6;
+            box-shadow: 0 10px 30px rgba(253, 203, 110, 0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .clue-text {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Efectos especiales para elementos encontrados */
+        .found {
+            background: linear-gradient(45deg, #4CAF50, #45a049) !important;
+            transform: scale(1.05);
+            animation: found-pulse 0.5s ease;
+        }
+
+        @keyframes found-pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        .audio-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1em;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+.audio-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+}
+
+    </style>
+</head>
+
+<body>
+     <audio id="musicaFondo" loop>
+        <source src="music/musica-romantica.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+    </audio>
+
+     <button class="audio-button" onclick="iniciarMusica()">🎵 Reproducir Música</button>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Cartas de Amor Para Flor<span class="heart">💕</span></h1>
+            <p class="subtitle">Para Flor, de parte de Usiel</p>
+        </div>
+
+        <div id="main-content">
+            <!-- El contenido se generará dinámicamente -->
+        </div>
+    </div>
+
+    <script>
+         function iniciarMusica() {
+            const audio = document.getElementById('musicaFondo');
+            audio.currentTime = 20; // Iniciar desde el segundo 30
+            audio.play();
+        }
+        const letters = [
+            {
+                date: "1 de Agosto",
+                content: "MI amor, hoy es el primer dia que estaremos alejados, se que extrañare estar contigo y poder verte aunquesea un momento, <span class='hidden-word' data-key='T'>te</span> pensare todos el dia esperando a que acabe el mes. Aunque no pueda verte, sé que tus hermosos ojos brillan como si<span class='hidden-letter' data-key='E'>e</span>mpre. Te extraño tanto que duele, pero este calendario será mi forma de estar contigo.",
+                floatingElements: []
+            },
+            {
+                date: "2 de Agosto",
+                content: "Buenos días mi <span class='hidden-emoji' data-key='A'>💝</span> amor. Es el segundo dia, como todos los días desde que me fui. Espero que comas bien y que te abrigues, quiero que estes bien y que sepas que te amo <span class='hidden-punctuation' data-key='M'>m</span>ucho a pesar de la distancia. Quiero que me escribas, que me cuentes lo que te suceda, esperare tu mensaje para decrite lo mucho que te amo.",
+                floatingElements: []
+            },
+            {
+                date: "3 de agosto",
+                content: "Sea la hora que leas esta carta, espero que estes bien mi amor, se que estas tan preciosa c<span class='hidden-word' data-key='O'>o</span>mo siempres, me gustaria que me envíes fotos de ti para verte, te extraño mucho qu<span class='hidden-punctuation' data-key='1'>i</span>ero que sepas que te amo un montón, eres lo mas preciado que puedo tener en mi vida, no lo olvides.",
+                floatingElements: []
+            },
+            {
+                date: "4 de Agosto",
+                content: "Mi amor, hoy he pensado mucho en ti, me gustaria tenerte aquí conmigo o pode<span class='hidden-letter' data-key='2'>r</span> verte aunquesea un momento para darte abrazo y besos. Eres tan especial<span class='hidden-punctuation' data-key='3'>,</span> tan hermosa. Cuídate mucho por favor, te necesito bien.",
+                floatingElements: []
+            },
+            {
+                date: "5 de Agosto",
+                content: "Mi amor como todos los días, espero que estes leyendo estas cartas, como siempre te quiero recordar que te amo. Tus ojos son lo que más extraño, esa mirada que me hace desar besarte y solo sonreir. Quisiera poder abrazarte <span class='hidden-word' data-key='4'>ahora</span> mismo y decirte al oído cuánto te <span class='hidden-letter' data-key='5'>a</span>mo.",
+                floatingElements: []
+            },
+            {
+                date: "6 de Agosto",
+                content: "Mi vida, espero que estes bien, yo lo estaré mienstras estes bien tu mi amor, quiero que sepas que pienso en ti, aveces en la noches me pongo a recordar todo lo que hicimos para poder estar juntos, es algo bonito recordar todo eso por que me emociona mucho<span class='hidden-emoji' data-key='6'>💔</span>, me hace saber que tengo a la mujer mas bella y tierna que puede pedir el mundo y amo que seas mia<span class='hidden-punctuation' data-key='7'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "7 de Agosto",
+                content: "Flor, el <span class='hidden-word' data-key='8'>tiempo</span> sin ti se siente eterno. Cada minuto es una eternidad cuando no puedo ver tus ojos, cuando no puedo escucharte reír. Pero sé que cuando regrese y te vea, será como si el tiempo se hubiera detenido. Eres mi <span class='hidden-letter' data-key='9'>u</span>niverso completo.",
+                floatingElements: []
+            },
+            {
+                date: "8 de Agosto",
+                content: "Mi amor, tu recuerdo es mi refugio en estos días difíciles. Cuando me siento solo, cierro los ojos e imagino los tuyos mirándome. Esa mirada tuya es mi <span class='hidden-word' data-key='0'>hogar</span>, mi paz, mi todo. Desearia poder ir de un lugar a otro en un isntante para ir a verte a cada rato, poder dormir contigo, se que cualquier dia difícil seria bonito cocntigo a mi lado<span class='hidden-punctuation' data-key='A'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "9 de Agosto",
+                content: "Ya van 9 días sin verte y siento como si hubieran pasado años. Cada <span class='hidden-letter' data-key='G'>c</span>arta que escribo es una forma de estar contigo, de imaginar que te estoy hablando. Quisiera poder ver tu <span class='hidden-emoji' data-key='O'>😊</span> sonrisa cuando lees esto, ver cómo tus ojos se iluminan. Eres mi motivación para seguir adelante.",
+                floatingElements: []
+            },
+            {
+                date: "10 de Agosto",
+                content: "mi vida, eres mi inspiración en cada momento. Se que estos días son mas largos cuando se que falta mucho para verte, pero prefiero no pensar en eso <span class='hidden-word' data-key='S'>solo</span> cuando sea el momento en que te vere otra vez, en cómo será abrazarte después de tanto tiempo. Cada día que pasa es un <span class='hidden-letter' data-key='T'>p</span>aso más cerca de ti.",
+                floatingElements: []
+            },
+            {
+                date: "11 de Agosto",
+                content: "Mi amor, tu amor es el <span class='hidden-emoji' data-key='O'>🎁</span> regalo más grande de mi vida. Aunque estemos separados físicamente, siento tu presencia en cada momento. En mis sueños, en mis pensamientos, en cada respiración. Tus ojos me acompañan a todas partes<span class='hidden-punctuation' data-key='2'>.</span> Gracias por amarme así, tan puro, tan real.",
+                floatingElements: []
+            },
+            {
+                date: "12 de Agosto",
+                content: "Amor mío, cada día que pasa reafirmo mi <span class='hidden-word' data-key='0'>decisión</span>: tú eres la mujer de mi vida. Estar lejos me ha hecho valorar aún más cada momento que hemos vivido juntos. Extraño poder solo decir que ns vamos a ver el tal <span class='hidden-letter' data-key='2'>m</span>omento, extraño tu voz, tu risa, tu forma de mirarme como si fuera lo más importante del mundo.",
+                floatingElements: []
+            },
+            {
+                date: "13 de Agosto",
+                content: "MI amor, tu nombre es perfecto porque eres exactamente eso: una <span class='hidden-emoji' data-key='5'>🌹</span> flor muy bonita que puedo pasar horas mirándola contemplando su belleza que solo se compara con la tuya. Extraño tanto mirarte, perderme en esa mirada tuya que me dice todo sin necesidad de palabras. Eres mi flor eterna<span class='hidden-punctuation' data-key='U'>,</span> mi amor infinito.",
+                floatingElements: []
+            },
+            {
+                date: "14 de Agosto",
+                content: "Mi vida, los recuerdos de nosotros son mi tesoro más preciado. Cada momento a tu lado ha sido mágico, cada vez que me miras con esos ojos tan hermosos siento que vivo un <span class='hidden-word' data-key='S'>cuento</span> de hadas. Solo me basta recordarte para saber el motivo de mi existencia, te amooooo<span class='hidden-punctuation' data-key='I'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "15 de Agosto",
+                content: "Estamos a la <span class='hidden-letter' data-key='E'>m</span>itad de agosto y a la mitad de nuestra separación. Cada día me acerca más a ti. Extraño tanto tus ojos, esa forma tan dulce que tienes de mirarme. Este calendario es mi forma de decirte cada día cuánto te amo, cuánto te extraño, cuánto te necesito<span class='hidden-punctuation' data-key='L'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "16 de Agosto",
+                content: "Mi amor, estos días son mas difíciles de lo que pensé sin poder verte, no sabes cuanto te extraño, no sabes la falta que me haces, espero que estes bien mi amor, que nunca acabe el amor que nos tenemos pues el que te tengo es mas grande que puedo espear días para <span class='hidden-emoji' data-key='2'>🦋</span> poder verte al final<span class='hidden-punctuation' data-key='0'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "17 de Agosto",
+                content: "Mi amor, eres mi <span class='hidden-word' data-key='2'>cómplice</span>, mi mejor amiga, mi amor eterno. La distancia no cambia nada de esto. Tus ojos siguen siendo mi refugio, aunque solo los pueda ver en mi mente. En ti he encontrado todo lo que siempre busqué: amor, comprensión, felicidad<span class='hidden-punctuation' data-key='5'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "18 de Agosto",
+                content: "Mi preciosa, extraño tanto tus <span class='hidden-emoji' data-key='F'>💋</span> besos, ya sabes que mas jsjsjs pero cad dia pienso en ti, solo esperando el dia en que te vere. Extraño tus abrazos, esos que me hacen sentir en casa. Extraño cómo me miras cuando me dices 'te amo'. Esa mirada es mi <span class='hidden-letter' data-key='L'>s</span>infonía favorita.",
+                floatingElements: []
+            },
+            {
+                date: "19 de Agosto",
+                content: "Amor,sabes que te extraño no es novedad, si estas mal por algún motivo, se que eres una mujer muy valiente y fuerte, la mujer que deseo para mi vida, para que sea mi esposa, nunca había estado tan seguro de amar a alguien como contigo, quiero que lo nuestro siga adelante, por que y<span class='hidden-word' data-key='O'>o</span> si quiero<span class='hidden-punctuation' data-key='R'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "20 de Agosto",
+                content: "Ya son <span class='hidden-letter' data-key='2'>2</span>0 días sin verte, mi amor, y cada uno ha sido una prueba de cuánto te amo. Mi amor por ti es infinito, trasciende la distancia y el tiempo. Tus ojos me acompañan cada día, cada noche. No necesito verte para saber que me amas, lo siento en cada fibra de mi ser<span class='hidden-punctuation' data-key='0'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "21 de Agosto",
+                content: "Mi amor , cuando pienso en el <span class='hidden-emoji' data-key='2'>🔮</span> futuro, solo te veo a ti. Veo tus ojos brillando de felicidad, veo nuestras risas, nuestras aventuras, nuestra vida juntos. Estos dias lejos no sera un motivo de dajarte de amar, pues es algo que incluso creo que fortalecera lo nuestro, te amo<span class='hidden-punctuation' data-key='5'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "22 de Agosto",
+                content: "Mi vida, tu <span class='hidden-word' data-key='A'>voz</span> es la canción que más extraño. Tus ojos son las estrellas que guían mis noches solitarias. Tu corazón es mi hogar, sin importar en qué parte del mundo esté. Eres todo lo que necesito, todo lo que quiero, todo lo que amo en este <span class='hidden-letter' data-key='M'>m</span>undo.",
+                floatingElements: []
+            },
+            {
+                date: "23 de Agosto",
+                content: "Mi amor, gracias por llenar mi vida de <span class='hidden-emoji' data-key='O'>🌈</span> colores, por ser la luz en mis días más oscuros. Aunque estemos separados, tu amor me llega todos los días. Tus ojos son el arcoíris después de la tormenta. Eres el regalo más hermoso que la vida me ha dado<span class='hidden-punctuation' data-key='R'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "24 de Agosto",
+                content: "Mi amor, un dia mas y un ida menos lo que falta para poder verte, quiero hacerte recordar que te amo mucho, aveces me pongo recordar como nos conocimos es casi perfecto, solo el <span class='hidden-letter' data-key='2'>d</span>etalle de no haberte dicho que tu eras para mi y seras mi pareja y en unos años me casare contigo jejjee se que seria raro, pero pensándolo bien se que valdría la pena,te amoooo<span class='hidden-punctuation' data-key='0'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "25 de Agosto",
+                content: "mi vida, llevamos 25 días y cada uno me ha enseñado algo nuevo sobre nuestro amor. Las <span class='hidden-word' data-key='2'>palabras</span> se quedan cortas para expresar lo que siento. Tu mirada dice más que mil poemas. Tus ojos son el idioma del amor que solo yo entiendo<span class='hidden-punctuation' data-key='5'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "26 de Agosto",
+                content: "Mi preciosa, faltan pocos días para que este mes termine, pero mi amor por ti apenas comienza. Tengo una vida entera de <span class='hidden-emoji' data-key='U'>🎊</span> sorpresas para darte, de momentos para compartir. Tus ojos serán testigos de todo el amor que tengo guardado para ti. Espero que me extrañes tanto como yo a ti mi amor<span class='hidden-punctuation' data-key='S'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "27 de Agosto",
+                content: "Amor mío, eres mi <span class='hidden-word' data-key='I'>persona</span> favorita en todo el universo. No hay nadie con quien prefiera estar que contigo. Tus ojos son mi lugar favorito para perderme. Cuando te vea de nuevo, me voy a quedar mirándote por horas, grabando cada detalle de tu hermosa mirada<span class='hidden-punctuation' data-key='E'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "28 de Agosto",
+                content: "Hermosa, quedan pocos días para nuestro reencuentro y mi corazón ya no cabe de la emoción. Cada <span class='hidden-letter' data-key='L'>f</span>inal es un nuevo comienzo, y contigo quiero todos los comienzos posibles. Tus ojos serán lo primero que quiero ver cuando regrese. Te adoro mucho, que haya pasado muchos días sin vernos no será excusa para verte diferente, solo con mas amor<span class='hidden-punctuation' data-key='2'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "29 de Agosto",
+                content: "Mi amor, penúltimo día sin vernos y ya cuento las <span class='hidden-emoji' data-key='0'>⏰</span> horas para verte. Mañana será el último mensaje, pero cuando nos volvamos a ver será el primero de infinitos 'te amo' en persona. Solo quiero abrazarte y hablar contigo en persona y decirte lo muhcho que te amo<span class='hidden-punctuation' data-key='2'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "30 de Agosto",
+                content: "mi amor, último día de agosto, pero no el último día que te digo que te amo. Mañana regreso, regreso a tus brazos, regreso a perderme en esos ojos que tanto he extrañado. Gracias por esperarme, por amarme a la distancia, por ser simplemente <span class='hidden-word' data-key='5'>perfecta</span><span class='hidden-punctuation' data-key='!'>.</span>",
+                floatingElements: []
+            },
+            {
+                date: "31 de Agosto",
+                content: "Mi preciosa Flor, hoy termina agosto y termina nuestra separación. Espero que no te hayas perdido todas las cartas de estos días sin verte jjejej, si lo haz hecho me demuestra cuanto me amas, cuanta paciencia me tienes, esperar cada dia para que llegue una nueva carta es algo que solo haria el amor de mi vida, y yo se que asi es, tu eres el amor de mi vida con quien vale la pena dedicar tiempo para hacerte feliz. Ahora tienes la clave completa para tu sorpresa. Te amo infinitamente, Flor. - Con todo mi amor y ansias de verte, tu novio Usiel :)",
+                floatingElements: [
+                    { text: "🔑 Clave final", message: "FIN", position: { top: "20px", right: "20px" } },
+                    { text: "♾️ Por siempre", message: "❤️", position: { bottom: "20px", left: "20px" } }
+                ]
+            }
+        ];
+
+        let foundCount = 0;
+        let totalElements = 0;
+
+        function getCurrentDate() {
+            const now = new Date();
+            return now.getDate();
+        }
+
+        function getCurrentMonth() {
+            const now = new Date();
+            return now.getMonth() + 1;
+        }
+
+        function showLetter() {
+            const currentDay = getCurrentDate();
+            const currentMonth = getCurrentMonth();
+            const mainContent = document.getElementById('main-content');
+
+            if (currentMonth !== 8) {
+                mainContent.innerHTML = `
+                    <div class="waiting-message">
+                        <h2>💕 ¡Espera un poquito más mi vida! 💕</h2>
+                        <p>Este calendario especial es para ti por el tiempo en que no estemos juntos, solo funciona durante el mes de agosto. ¡Regresa cuando llegue agosto mi amor!</p>
+                        <div class="heart" style="font-size: 3em; margin: 20px 0;">💝</div>
+                    </div>
+                `;
+                return;
+            }
+
+            if (currentDay > letters.length) {
+                mainContent.innerHTML = `
+                    <div class="completion-message" style="display: block;">
+                        <h2>🎉 ¡Has completado todo el calendario! 🎉</h2>
+                        <p>¡Felicidades mi amor! Has encontrado todos los mensajes secretos de agosto.</p>
+                        <p>Ahora que tienes la clave completa, es hora de la gran sorpresa final...</p>
+                        <div class="heart" style="font-size: 3em; margin: 20px 0;">💕</div>
+                        <p><strong>La clave completa es:</strong> TE AMO 12345678901234567890AGOSTO2025FLOR!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const todayLetter = letters[currentDay - 1];
+            foundCount = 0;
+
+            // Contar elementos ocultos en el contenido
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = todayLetter.content;
+            totalElements = tempDiv.querySelectorAll('[data-key]').length + todayLetter.floatingElements.length;
+
+            let floatingElementsHTML = '';
+            todayLetter.floatingElements.forEach((element, index) => {
+                floatingElementsHTML += `
+                    <div class="floating-element" 
+                         style="top: ${element.position.top || 'auto'}; 
+                                right: ${element.position.right || 'auto'}; 
+                                bottom: ${element.position.bottom || 'auto'}; 
+                                left: ${element.position.left || 'auto'};"
+                         onclick="revealFloatingMessage(this, '${element.message}')">
+                        ${element.text}
+                        <div class="reveal-message">${element.message}</div>
+                    </div>
+                `;
+            });
+
+            mainContent.innerHTML = `
+                <div class="day-counter">Día ${currentDay} de 31 - Agosto 2024</div>
+                <div class="clue-text">
+                    💡 <strong>Pista:</strong> Busca las palabras, letras, emojis y símbolos especiales en el texto. ¡Algunos están flotando por ahí!
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress" style="width: 0%"></div>
+                </div>
+                <div class="letter-container">
+                    <div class="letter-date">${todayLetter.date}</div>
+                    <div class="letter-content" onclick="handleContentClick(event)">
+                        ${todayLetter.content}
+                    </div>
+                    ${floatingElementsHTML}
+                    <button class="found-button" onclick="completeDay()" id="complete-btn" style="display: none;">
+                        ¡Encontré todos los secretos! 💝
+                    </button>
+                </div>
+                <div class="completion-message" id="completion-msg">
+                    <h2>🎉 ¡Excelente trabajo mi amor! 🎉</h2>
+                    <p>Has descubierto todos los mensajes secretos de hoy. Cada uno forma parte de una clave especial que se revelará al final del mes.</p>
+                    <p>¡Mañana te espera una nueva carta llena de amor y más sorpresas! 💕</p>
+                    <div class="heart" style="font-size: 2em; margin: 10px 0;">💖</div>
+                    <p><em>Los secretos encontrados hoy se han guardado en tu corazón...</em></p>
+                </div>
+            `;
+        }
+
+        function handleContentClick(event) {
+            const target = event.target;
+            if (target.hasAttribute('data-key') && !target.classList.contains('found')) {
+                revealMessage(target, target.getAttribute('data-key'));
+            }
+        }
+
+        function revealMessage(element, key) {
+            if (element.classList.contains('found')) return;
+
+            element.classList.add('found');
+            foundCount++;
+
+            // Mostrar mensaje revelado
+            const revealMsg = document.createElement('div');
+            revealMsg.className = 'reveal-message';
+            revealMsg.textContent = key;
+            revealMsg.style.opacity = '1';
+            revealMsg.style.top = '-35px';
+            revealMsg.style.left = '50%';
+            revealMsg.style.transform = 'translateX(-50%)';
+            element.style.position = 'relative';
+            element.appendChild(revealMsg);
+
+            // Actualizar barra de progreso
+            updateProgress();
+
+            // Efecto de confeti (simulado con emojis)
+            createConfetti(element);
+
+            setTimeout(() => {
+                if (revealMsg.parentNode) {
+                    revealMsg.remove();
+                }
+            }, 2000);
+
+            checkCompletion();
+        }
+
+        function revealFloatingMessage(element, key) {
+            if (element.classList.contains('found')) return;
+
+            element.classList.add('found');
+            foundCount++;
+
+            const revealMsg = element.querySelector('.reveal-message');
+            revealMsg.style.opacity = '1';
+            revealMsg.style.top = '-40px';
+
+            updateProgress();
+            createConfetti(element);
+            checkCompletion();
+        }
+
+        function updateProgress() {
+            const progressBar = document.getElementById('progress');
+            const percentage = (foundCount / totalElements) * 100;
+            progressBar.style.width = percentage + '%';
+        }
+
+        function createConfetti(element) {
+            const confettiEmojis = ['💕', '💖', '💝', '🌹', '✨', '💫', '🎉'];
+            const rect = element.getBoundingClientRect();
+
+            for (let i = 0; i < 5; i++) {
+                const confetti = document.createElement('div');
+                confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+                confetti.style.position = 'fixed';
+                confetti.style.left = rect.left + rect.width / 2 + 'px';
+                confetti.style.top = rect.top + 'px';
+                confetti.style.fontSize = '20px';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '1000';
+                confetti.style.transition = 'all 1s ease-out';
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.style.transform = `translate(${(Math.random() - 0.5) * 200}px, ${-100 - Math.random() * 100}px) rotate(${Math.random() * 360}deg)`;
+                    confetti.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.remove();
+                    }
+                }, 1050);
+            }
+        }
+
+        function checkCompletion() {
+            if (foundCount >= totalElements) {
+                document.getElementById('complete-btn').style.display = 'block';
+            }
+        }
+
+        function completeDay() {
+            document.querySelector('.letter-container').style.display = 'none';
+            document.getElementById('completion-msg').style.display = 'block';
+
+            // Efecto especial de finalización
+            const msg = document.getElementById('completion-msg');
+            msg.style.transform = 'scale(0.8)';
+            msg.style.opacity = '0';
+
+            setTimeout(() => {
+                msg.style.transition = 'all 0.5s ease';
+                msg.style.transform = 'scale(1)';
+                msg.style.opacity = '1';
+            }, 100);
+        }
+
+        // Inicializar la página
+        window.onload = function () {
+            showLetter();
+        };
+
+        // Efecto de partículas de fondo adicional
+        function createBackgroundHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.textContent = '💕';
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.top = window.innerHeight + 'px';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '-1';
+                heart.style.opacity = '0.3';
+                heart.style.transition = 'all 8s linear';
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.style.transform = `translateY(-${window.innerHeight + 100}px) rotate(360deg)`;
+                    heart.style.opacity = '0';
+                }, 100);
+
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.remove();
+                    }
+                }, 8100);
+            }, 3000);
+        }
+
+        // Iniciar efectos de fondo
+        setTimeout(createBackgroundHearts, 2000);
+    </script>
+</body>
+
+</html>
